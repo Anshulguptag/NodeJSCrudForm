@@ -1,0 +1,30 @@
+<h3>{{viewTitle}}</h3>
+
+<form action="/company" method="POST" autocomplete="off">
+<input type="hidden" name="_id" value="{{company._id}}">   
+    <div class="form-group">
+        <label for="name">Company Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Company Name" value="{{company.name}}"> 
+        <div class="text-danger">
+            {{company.nameError}}
+        </div>  
+    </div>
+    <div class="form-group">
+        <label for="department">Address</label>
+        <input type="text" class="form-control" name="address" placeholder="Address" value="{{company.department}}">
+        <div class="text-danger">
+            {{company.addressError}}
+        </div>   
+    </div>
+    <div class="form-group">
+        <label for="rollno">Mobile No:</label>
+        <input type="number" class="form-control" name="mobile" placeholder="Mobile No" value="{{company.mobile}}">
+        <div class="text-danger">
+            {{studnet.mobileerror}}
+        </div>   
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-inbox"></i> Submit</button>
+        <a href="/company/list" class="btn btn-success"><span class="glyphicon glyphicon-list-alt"></span> View All</a>
+    </div>
+</form>

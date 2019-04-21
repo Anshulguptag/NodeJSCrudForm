@@ -1,0 +1,22 @@
+<h3>
+    <a href="/company_student" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Register New Company</a> Company List 
+</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Student</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.company_name}}</td>
+            <td>{{this.student_name}}</td>
+            <td>
+                <a href="/company_student/delete/{{this._id}}" onclick="return confirm('Are you sure to unregister this company ?');">Unregister</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

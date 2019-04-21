@@ -6,7 +6,9 @@ const exphbs = require("express-handlebars");
 const bodyparser = require("body-parser");
 
 const mainController = require('./controllers/mainController');
-const employeeController = require('./controllers/employeeController');
+const studentController = require('./controllers/studentController');
+const companyController = require('./controllers/companyController');
+const company_studentController = require('./controllers/company_studentController');
 
 var app = express();
 app.use(bodyparser.urlencoded({
@@ -25,4 +27,9 @@ app.listen(3000, () => {
 
 app.use("/", mainController);
 
-app.use("/employee", employeeController);
+app.use("/student", studentController);
+
+app.use("/company", companyController);
+
+app.use("/company_student", company_studentController);
+

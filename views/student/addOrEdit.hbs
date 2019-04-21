@@ -1,0 +1,39 @@
+<h3>{{viewTitle}}</h3>
+
+<form action="/student" method="POST" autocomplete="off">
+<input type="hidden" name="_id" value="{{student._id}}">   
+    <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Full Name" value="{{student.name}}"> 
+        <div class="text-danger">
+            {{student.nameError}}
+        </div>  
+    </div>
+    <div class="form-group">
+        <label for="department">Department</label>
+        <input type="text" class="form-control" name="department" placeholder="Department" value="{{student.department}}">
+        <div class="text-danger">
+            {{student.departmentError}}
+        </div>   
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="rollno">Roll No:</label>
+            <input type="number" class="form-control" name="rollno" placeholder="Roll No" value="{{student.rollno}}">
+            <div class="text-danger">
+                {{studnet.rollnoerror}}
+            </div>   
+        </div>
+        <div class="form-group col-md-6">
+            <label for="cgpa">CGPA</label>
+            <input type="number" class="form-control" name="cgpa" placeholder="CGPA" value="{{student.cgpa}}">
+            <div class="text-danger">
+                {{student.cgpaerror}}
+            </div>   
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-inbox"></i> Submit</button>
+        <a href="/student/list" class="btn btn-success"><span class="glyphicon glyphicon-list-alt"></span> View All</a>
+    </div>
+</form>

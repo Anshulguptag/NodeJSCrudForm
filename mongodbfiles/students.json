@@ -1,0 +1,16 @@
+{ 
+    "_id" : ObjectId("5cbc24019ae6d83a69f32ca6"), 
+    "name" : "Anshul Gupta", 
+    "department" : "IT", 
+    "rollno" : NumberInt(1514803115), 
+    "cgpa" : NumberInt(9), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5cbc48a060c14b4da0325ffe"), 
+    "name" : "Abhi Gupta", 
+    "department" : "CSE", 
+    "rollno" : NumberInt(16), 
+    "cgpa" : NumberInt(9), 
+    "__v" : NumberInt(0)
+}

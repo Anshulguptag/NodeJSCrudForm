@@ -1,0 +1,12 @@
+{ 
+    "_id" : ObjectId("5cbc6d62b71de770173588da"), 
+    "company_id" : "Nagarro", 
+    "student_id" : "Abhi", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5cbc6ddab71de770173588db"), 
+    "company_id" : "Amazon", 
+    "student_id" : "Anshul", 
+    "__v" : NumberInt(0)
+}
