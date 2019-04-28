@@ -1,10 +1,15 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="/jquery.multiselect.css" rel="stylesheet" />
+<script src="/jquery.multiselect.js"></script>	
 <style>
-    .dropdown-toggle{
-        width: 100%;
-        background-color: #fff;
-        color: #000;
-        border-color: #000;
-    }
+input[type=checkbox]{
+    opacity: 0;
+}
+.ms-options{
+	margin-left : 14px;
+	border-radius: 10px;
+    min-height: 0px !important;
+}
 </style>
 <h3>{{viewTitle}}</h3>
 
@@ -15,7 +20,7 @@
         <select name="company_name" class="form-control">
             <option value="">Select Company</option>
             {{#each companylist}}
-                <option value="{{this.name}}">{{this.name}}</option>
+                <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
         </select>
         <div class="text-danger">
@@ -24,43 +29,27 @@
     </div>
     <div class="form-group">
   <label class="mdb-main-label">Student Name</label>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%"></button>
-            <ul class="dropdown-menu" style="width: 100%">
-                {{#each studentlist}}
-                    <li style="padding: 2%; cursor: pointer;"><input type="checkbox" name="student_name" value={{this.name}} class="checkbox" style="opacity: 0">{{this.name}}</li>
-                {{/each}}
-            </ul>
-        </div>
-
+        <select name="student_name[]" multiple id="langOpt">
+        {{#each studentlist}}
+            <option value={{this._id}}>{{this.name}}</option>
+	    {{/each}}
+	    </select>
         <div class="text-danger">
             {{company.nameError}}
         </div>  
-        
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-inbox"></i> Submit</button>
         <a href="/company_student/list" class="btn btn-success"><span class="glyphicon glyphicon-list-alt"></span> View All</a>
     </div>
 </form>
-<script>
-    $("li").click(function(){
-        if($(this).children(".checkbox").prop("checked") != true){
-            $(this).children(".checkbox").prop('checked',true);
-            $(this).css({
-                "background-color" : "#f15b5b",
-                "color" : "#fff"
-            });
-            var name = $(this).text();
-            console.log(name);
-            $(this).parent().siblings(".dropdown-toggle").append(name+", ");
-        }
-        else{
-            $(this).children(".checkbox").prop('checked',false);
-            $(this).css({
-                "background-color" : "#fff",
-                "color" : "#000"
-            });
-        }
-    });
+<script type="text/javascript">
+	$('#langOpt').multiselect({
+    columns: 1,
+    placeholder: 'Select Countries',
+    search: true
+});
+$("li").click(function(){
+	console.log($("button span").text());
+});
 </script>

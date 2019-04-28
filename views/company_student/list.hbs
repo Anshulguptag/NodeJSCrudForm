@@ -11,10 +11,10 @@
     <tbody>
         {{#each list}}
         <tr>
-            <td>{{this.company_name}}</td>
-            <td>{{this.student_name}}</td>
+            <td>{{this.sname}}</td>
+            <td>{{this.cname}}</td>
             <td>
-                <a href="/company_student/delete/{{this._id}}" onclick="return confirm('Are you sure to unregister this company ?');">Unregister</a>
+                <a href="/company_student/delete/{{this.id}}" onclick="return confirm('Are you sure to unregister this company ?');">Unregister</a>
             </td>
         </tr>
         {{/each}}

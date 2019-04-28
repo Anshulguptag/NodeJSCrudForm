@@ -25,6 +25,8 @@ app.listen(3000, () => {
     console.log('Express server started at port : 3000');
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use("/", mainController);
 
 app.use("/student", studentController);

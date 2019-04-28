@@ -3,6 +3,7 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const Student = mongoose.model('Student'); //STUDENT DATABASE
+const Comp_Model = mongoose.model('Company_Student'); //FOR STUDENT PER COMPANY DATABASE
 
 //RENDERING STUDENT ENTRY/UPDATE PAGE
 router.get("/", (req,res) => {
@@ -109,7 +110,15 @@ router.get("/:id", (req, res)=>{
 router.get("/delete/:id", (req, res) => {
     Student.findByIdAndRemove(req.params.id, {useFindAndModify: false}, (err,doc) => {
         if (!err){
-            res.redirect('/student/list');
+            var myquery = { student_name: req.params.id};
+            Comp_Model.deleteMany(myquery,function(err, doc){
+                if(!err){
+                    res.redirect('/student/list');
+                }
+                else{
+                    console.log("Error in company_student delete: "+err);
+                }
+            });
         }
         else{
             console.log("Error in student delete: "+err);

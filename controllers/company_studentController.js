@@ -37,11 +37,21 @@ router.post("/", (req,res) => {
 
 //SHOW ALL THE STUDENTS WITH THEIR COMPANIES
 router.get("/list", (req,res) => {
-    Comp_Model.find((err, docs) => {
+    Comp_Model.find(async (err, docs) => {
         if (!err){
+            var dict = [];
+            for(var i=0;i<docs.length;i++)
+            {
+                var id = docs[i]._id;
+                var student_id = docs[i].student_name;
+                var company_id = docs[i].company_name;
+                student_name = await Student.find({_id: student_id});
+                company_name = await Company.find({_id: company_id});
+                dict.push({id: id, sname: student_name[0].name, cname: company_name[0].name});
+            }
             res.render("company_student/list", {
-                list: docs
-            });
+                list: dict
+            });    
         }
         else{
             console.log('Error in retrieving company_student list : ' + err);
@@ -49,56 +59,32 @@ router.get("/list", (req,res) => {
     });
 });
 
+
+
 //FUNCTION TO INSERT RECORD
 function insertRecord(req, res){
     var company_name = req.body.company_name;
     var student_name = req.body.student_name;
-    //FOR SINGLE ENTRY
-    if(typeof student_name=="string")
-       {
-            var company_student = new Comp_Model();
-            company_student.company_name = company_name; //GETTING COMPANY NAME
-            company_student.student_name = student_name; //GETTING STUDENT NAME
-            company_student.save((err, doc)=> {
-            if(err){
-                if(err.name == 'ValidationError'){
-                    handleValidationError(err, req.body);
-                    res.render("company_student/addOrEdit",{
-                        viewTitle : "Allot student per company" ,
-                        company_student: req.body
-                    });
-                }
-                console.log("Error during record insertion : "+err);
-            }
-            else
-            {
-                res.redirect('company_student/list'); //REDIRECT TO LIST PAGE
-            }
-       });
-       }   
     //FOR ALLOTING ONE COMPANY TO MORE THAN ONE STUDENT
-    else{
-        for (var i=0;i<student_name.length;i++)
-        {
-        var company_student = new Comp_Model();
-        company_student.company_name = company_name; //GETTING COMPANY NAME FROM FORM
-        company_student.student_name = student_name[i]; //GETTING STUDENT NAME FROM FORM
-        company_student.save((err, doc)=> {
-            if(err){
-                if(err.name == 'ValidationError'){
-                    handleValidationError(err, req.body);
-                    res.render("company_student/addOrEdit",{
-                        viewTitle : "Allot student per company" ,
-                        company_student: req.body
-                    });
+    for (var i=0;i<student_name.length;i++)
+    {
+    var company_student = new Comp_Model();
+    company_student.company_name = company_name; //GETTING COMPANY NAME FROM FORM
+    company_student.student_name = student_name[i]; //GETTING STUDENT NAME FROM FORM
+    company_student.save((err, doc)=> {
+        if(err){
+            if(err.name == 'ValidationError'){
+                handleValidationError(err, req.body);
+                res.render("company_student/addOrEdit",{
+                    viewTitle : "Allot student per company" ,
+                    company_student: req.body
+                });
                 }
-                console.log("Error during record insertion : "+err);
+            console.log("Error during record insertion : "+err);
             }
         }); 
     }
     res.redirect('company_student/list'); //REDIRECT TO LIST PAGE
-    }
-    
 }
 
 //FOR HANDLING ERRORS
