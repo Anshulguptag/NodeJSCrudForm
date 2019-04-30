@@ -11,8 +11,8 @@
     <tbody>
         {{#each list}}
         <tr>
-            <td>{{this.sname}}</td>
             <td>{{this.cname}}</td>
+            <td>{{this.sname}}</td>
             <td>
                 <a href="/company_student/delete/{{this.id}}" onclick="return confirm('Are you sure to unregister this company ?');">Unregister</a>
             </td>
